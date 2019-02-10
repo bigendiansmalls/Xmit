@@ -9,5 +9,14 @@ Created-By: 11.0.2+7 (Oracle Corporation)
 Main-Class: com.bytezone.xmit.gui.XmitApp
 EOF
 
-jar -cvmf manifest XmitMe.jar -C src . -C resources .
+jar -cvmf manifest XmitMe.jar -C src . -C resources .  >/dev/null 2>&1
 
+cat<<EOF>run.sh
+#!/bin/bash
+nohup /usr/bin/java \
+--module-path /Users/chad/Downloads/javafx-sdk-11.0.2/lib \
+--add-modules=javafx.controls -Dfile.encoding=UTF-8 \
+-jar /Users/chad/WorkInProgress/Xmit/XmitMe.jar >/dev/null 2>&1 &
+EOF
+
+git clean -xdf
